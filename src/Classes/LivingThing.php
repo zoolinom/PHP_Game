@@ -8,6 +8,7 @@
 
 namespace Game\Classes;
 
+use Game\Weapons\Axe;
 use Game\Weapons\Weapon;
 
 
@@ -64,14 +65,19 @@ class LivingThing
         $this->getEvade() ? $text = "yes" : $text = "no";
         echo "Evade: " . $text . "\r\n";
         $this->weapon == null ? $text = 'No weapon' : $text = "\r\n\tType: " . $this->weapon->getType() . "\r\n\t" .
-            "Damage: " . $this->weapon->getDamage();
-        $text .= " (upgraded damage: ";
-        foreach ($this->weapon->getUpgrades() as $upgrade)
+            "Damage: " . "(" . $this->weapon->getDamage(true) . ") " . $this->weapon->getDamage();
+        if ($this->weapon instanceof Axe)
         {
-          $text .= $upgrade->getDamage()  . "+";
+            $text .= " (additional damage: " . $this->weapon->getAdditionalDamage();
+            $text .= ",";
+        } else {
+            $text .= " (";
         }
+        $text .= " upgraded damage: ";
+        $text .= $this->weapon->getUpgradesDamages();
         $text .= ")";
         echo "Weapon: " . $text  . "\r\n";
+
     }
 
     public function isDead()

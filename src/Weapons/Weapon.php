@@ -15,12 +15,14 @@ class Weapon
 {
     protected $type;
     protected $damage;
+    protected $baseDamage;
     protected $upgrades = [];
 
     public function __construct($type, $damage)
     {
         $this->type = $type;
         $this->damage = $damage;
+        $this->baseDamage = $damage;
     }
 
     /**
@@ -32,11 +34,14 @@ class Weapon
     }
 
     /**
+     * @param boolean $base return base damage or upgraded damage
      * @return mixed
      */
-    public function getDamage()
+    public function getDamage($base = false)
     {
         $damage = $this->damage;
+        if ($base)
+            return $damage;
         foreach ($this->upgrades as $upgrade)
         {
             $damage += $upgrade->getDamage();
@@ -56,5 +61,16 @@ class Weapon
     public function getUpgrades(): array
     {
         return $this->upgrades;
+    }
+
+    private function getUpgradeDamage(Upgrade $u)
+    {
+        return $u->getDamage();
+    }
+
+    public function getUpgradesDamages()
+    {
+        $damages = array_map(array($this, "getUpgradeDamage"), $this->upgrades);
+        return implode("+", $damages);
     }
 }

@@ -11,10 +11,21 @@ namespace Game\Weapons;
 
 class Axe extends Weapon
 {
+    protected $additionalDamage = 5;
 
-    public function getDamage()
+    public function getDamage($base = false)
     {
-        return parent::getDamage();
+        if ($base)
+            return parent::getDamage($base);
+        return parent::getDamage($base) + $this->additionalDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAdditionalDamage(): int
+    {
+        return $this->additionalDamage;
     }
 
 }
