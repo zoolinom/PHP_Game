@@ -9,12 +9,13 @@
 use Game\Classes\Hero;
 use Game\Weapons\Weapon;
 use Game\Weapons\Axe;
+use Game\Armours\Armour;
 use Game\SpecialAbilities\SpecialAbilityDamageX2;
 use Game\SpecialAbilities\SpecialAbilityEvade;
 use Game\Upgrades\Upgrade;
 
 
-$hero = new Hero("Elsa", 200, new Weapon("Bastard Sword", 40), false,
+$hero = new Hero("Elsa", 200, new Weapon("Bastard Sword", 40), new Armour("Plate", 20), false,
     new SpecialAbilityDamageX2());
 $hero->seeStats();
 
@@ -22,7 +23,7 @@ $axe = new Axe("Axe", 30);
 $upgrade = new Upgrade("stone", 5);
 //$axe->addUpgrade($upgrade);
 //var_dump($axe->getDamage());
-$hero2 = new Hero("Mark", 200, $axe, false, new SpecialAbilityEvade());
+$hero2 = new Hero("Mark", 200, $axe, new Armour("Chain Mail", 25), false, new SpecialAbilityEvade());
 $hero2->getWeapon()->addUpgrade($upgrade);
 $hero2->seeStats();
 

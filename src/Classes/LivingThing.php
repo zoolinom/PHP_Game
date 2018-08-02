@@ -10,6 +10,7 @@ namespace Game\Classes;
 
 use Game\Weapons\Axe;
 use Game\Weapons\Weapon;
+use Game\Armours\Armour;
 
 
 class LivingThing
@@ -18,14 +19,16 @@ class LivingThing
     protected $health;
     protected $maxhp;
     protected $weapon;
+    protected $armour;
     protected $evade;
 
-    public function __construct($name, $health, Weapon $weapon = null, $evade = false)
+    public function __construct($name, $health, Weapon $weapon = null, Armour $armour = null, $evade = false)
     {
         $this->name = $name;
         $this->health = $health;
         $this->maxhp = $health;
         $this->weapon = $weapon;
+        $this->armour = $armour;
         $this->evade = $evade;
     }
 
@@ -43,6 +46,14 @@ class LivingThing
     public function getWeapon(): Weapon
     {
         return $this->weapon;
+    }
+
+    /**
+     * @return null
+     */
+    public function getArmour()
+    {
+        return $this->armour;
     }
 
     /**
@@ -77,6 +88,10 @@ class LivingThing
         $text .= $this->weapon->getUpgradesDamages();
         $text .= ")";
         echo "Weapon: " . $text  . "\r\n";
+
+        $this->armour == null ? $text = 'No armour' : $text = "\r\n\tType: " . $this->armour->getType() . "\r\n\t" .
+            "Defense: " . $this->armour->getDefense();
+        echo "Armour: " . $text . "\r\n";
 
     }
 
