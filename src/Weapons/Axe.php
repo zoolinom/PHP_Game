@@ -28,4 +28,9 @@ class Axe extends Weapon
         return $this->additionalDamage;
     }
 
+    public function getClassName()
+    {
+        return (new \ReflectionClass($this))->getName();
+    }
+
 }

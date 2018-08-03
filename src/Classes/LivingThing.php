@@ -75,18 +75,33 @@ class LivingThing
         echo 'Health: ' . $this->health  . "\r\n";
         $this->getEvade() ? $text = "yes" : $text = "no";
         echo "Evade: " . $text . "\r\n";
-        $this->weapon == null ? $text = 'No weapon' : $text = "\r\n\tType: " . $this->weapon->getType() . "\r\n\t" .
-            "Damage: " . "(" . $this->weapon->getDamage(true) . ") " . $this->weapon->getDamage();
-        if ($this->weapon instanceof Axe)
+        if ($this->weapon != null)
         {
-            $text .= " (additional damage: " . $this->weapon->getAdditionalDamage();
-            $text .= ",";
+            $text = "\r\n\tType: " . $this->weapon->getType() . "\r\n\t" .
+                "Damage: " . "(" . $this->weapon->getDamage(true) . ") " . $this->weapon->getDamage();
+            $className = $this->weapon->getClassName();
+            echo "Class name: " . $className;
+            $res = $this->weapon instanceof $className;
+            var_dump($res);
+            /*
+             * if ($this->weapon instanceof $className)
+             * This is not working good
+             * TODO Examine this!!!!
+             */
+            if ($this->weapon instanceof Axe)
+            {
+                $text .= " (additional damage: " . $this->weapon->getAdditionalDamage();
+                $text .= ",";
+            } else if ($this->weapon instanceof Weapon) {
+                $text .= " (";
+            }
+
+                $text .= " upgraded damage: ";
+                $text .= $this->weapon->getUpgradesDamages();
+                $text .= ")";
         } else {
-            $text .= " (";
+            $text = 'No weapon';
         }
-        $text .= " upgraded damage: ";
-        $text .= $this->weapon->getUpgradesDamages();
-        $text .= ")";
         echo "Weapon: " . $text  . "\r\n";
 
         $this->armour == null ? $text = 'No armour' : $text = "\r\n\tType: " . $this->armour->getType() . "\r\n\t" .
@@ -128,7 +143,8 @@ class LivingThing
     public function attack(LivingThing $thing)
     {
         echo "\r\n" . $this->name . " attacks " . $thing->getName() . "\r\n";
-        $this->weapon == null ? $damage = 10 : $damage = $this->weapon->getDamage();
+        //$this->weapon == null ? $damage = 10 : $damage = $this->weapon->getDamage();
+        $damage = $this->weapon->getDamage() ?? 10;
         $thing->takeDamage($damage);
     }
 

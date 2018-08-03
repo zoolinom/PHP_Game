@@ -7,8 +7,7 @@
  */
 
 use Game\Classes\Hero;
-use Game\Weapons\Weapon;
-use Game\Weapons\Axe;
+use Game\Weapons\{Weapon, Axe}; //new in PHP 7.1
 use Game\Armours\Armour;
 use Game\SpecialAbilities\SpecialAbilityDamageX2;
 use Game\SpecialAbilities\SpecialAbilityEvade;
@@ -27,6 +26,9 @@ $hero2 = new Hero("Mark", 200, $axe, new Armour("Chain Mail", 25), false, new Sp
 $hero2->getWeapon()->addUpgrade($upgrade);
 $hero2->seeStats();
 
+$hero3 = new Hero("Test", 200, null, new Armour("Plate", 20), false,
+    new SpecialAbilityDamageX2());
+$hero3->seeStats();
 //$hero->takeDamage(60);
 
 while (!$hero->isDead() and !$hero2->isDead()) {

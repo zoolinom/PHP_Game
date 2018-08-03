@@ -73,4 +73,9 @@ class Weapon
         $damages = array_map(array($this, "getUpgradeDamage"), $this->upgrades);
         return implode("+", $damages);
     }
+
+    public function getClassName()
+    {
+        return (new \ReflectionClass($this))->getName();
+    }
 }
