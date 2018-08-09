@@ -88,16 +88,24 @@ class LivingThing
              * This is not working good
              * TODO Examine this!!!!
              */
+            $bracketOpen = False;
+            $upgDamage = $this->weapon->getUpgradesDamages();
             if ($this->weapon instanceof Axe)
             {
                 $text .= " (additional damage: " . $this->weapon->getAdditionalDamage();
                 $text .= ",";
-            } else if ($this->weapon instanceof Weapon) {
-                $text .= " (";
+                $bracketOpen = True;
+            } else {
+                if ($upgDamage != '') {
+                    $text .= " (";
+                    $bracketOpen = True;
+                }
             }
-
+            if ($upgDamage != '') {
                 $text .= " upgraded damage: ";
-                $text .= $this->weapon->getUpgradesDamages();
+                $text .= $upgDamage;
+            }
+            if ($bracketOpen)
                 $text .= ")";
         } else {
             $text = 'No weapon';
