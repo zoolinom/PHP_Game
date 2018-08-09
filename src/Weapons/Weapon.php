@@ -71,6 +71,8 @@ class Weapon
     public function getUpgradesDamages()
     {
         $damages = array_map(array($this, "getUpgradeDamage"), $this->upgrades);
+        if (empty($damages))
+            return "";
         return implode("+", $damages);
     }
 
