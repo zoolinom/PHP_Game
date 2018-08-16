@@ -8,12 +8,13 @@
 
 namespace Game\Classes;
 
+use Game\Interfaces\Attack;
 use Game\Weapons\Weapon;
 use Game\Armours\Armour;
 use Game\SpecialAbilities\SpecialAbility;
 
 
-class Hero extends LivingThing
+class Hero extends LivingThing implements Attack
 {
     protected $specialAbility;
 

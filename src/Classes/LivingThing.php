@@ -11,9 +11,10 @@ namespace Game\Classes;
 use Game\Weapons\Axe;
 use Game\Weapons\Weapon;
 use Game\Armours\Armour;
+use Game\Interfaces\Attack;
 
 
-class LivingThing
+class LivingThing implements Attack
 {
     protected $name;
     protected $health;

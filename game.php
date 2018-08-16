@@ -6,13 +6,15 @@
  * Time: 8:27 PM
  */
 
-use Game\Classes\Hero;
+use Game\Classes\{Hero, Orc};
 use Game\Weapons\{Weapon, Axe}; //new in PHP 7.1
 use Game\Armours\Armour;
 use Game\SpecialAbilities\SpecialAbilityDamageX2;
 use Game\SpecialAbilities\SpecialAbilityEvade;
 use Game\Upgrades\Upgrade;
 
+$orc = new Orc("Pretty", 50);
+$orc->seeStats();
 
 $hero = new Hero("Elsa", 200, new Weapon("Bastard Sword", 40), new Armour("Plate", 20), false,
     new SpecialAbilityDamageX2());
